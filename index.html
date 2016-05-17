@@ -65,6 +65,15 @@
 				aantalGeklikt-=1;
 			}
 		}
+		
+		function draaiKaart(el){
+			if (el.src.endsWith("toe.gif")){
+				el.src=kaart[el.id];
+				document.getElementById("status").innerHTML="Klik op een kaartje";
+			}else{
+				document.getElementById("status").innerHTML="Deze is al gekozen, klik op een gesloten kaart";
+			}
+		}
     </script>
 </body>
 </html>
