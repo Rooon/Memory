@@ -12,11 +12,14 @@
 </head>
 <body>
 	<div id="container"></div>
-	<center><p id="status">Klik op een kaartje</p></center>
+	<center>
+		<p id="status">Klik op een kaartje</p>
+		<p id="aantalbeurten">Aantal beurten: 0</p>
+	</center>
 	<script>
 		var kaart = new Array(); // Array Kaart bevat de bestandsnamen van de kaartafbeeldingen
 		var aantal = 10; // aantal verschillende kaarten. Wordt later instelbaar.
-		var count = 0;
+		var aantalBeurten = 0;
 		var aantalGeklikt=0;
 		var kaart1='';
 		var kaart2='';
@@ -43,13 +46,11 @@
 		
 		function toonKaart(aantal){
 			for(i = 0; i < kaart.length; i++){
-				count++;
 				document.getElementById('container').innerHTML += "<img src='toe.gif' id='"+i+"' onclick='checkKaart(this)'>";
 			}
 		}
 		
 		function checkKaart(el){
-			console.log(el);
 			if (el.src.endsWith("toe.gif")){
 				el.src=kaart[el.id];
 				document.getElementById("status").innerHTML="Klik op een kaartje";
@@ -69,21 +70,21 @@
 				if(kaart1!=kaart2&&kaart[kaart1]==kaart[kaart2]){
 					document.getElementById("status").innerHTML="Goed zo!";
 					setTimeout(function(){document.getElementById("status").innerHTML="Klik op een kaartje"}, 1000);
+					aantalBeurten++;
 				}else{
 					document.getElementById("status").innerHTML="Dit zijn verschillende kaartjes";
-					console.log(kaart1);
-					console.log(kaart2);
 					setTimeout(function(){
 						document.getElementById("status").innerHTML="Klik op een kaartje";
 						document.getElementById(kaart1).src="toe.gif";
 						document.getElementById(kaart2).src="toe.gif";
 					}, 1000);
+					aantalBeurten++;
+					
 				}
 				aantalGeklikt-=1;
 			}
-			
+			document.getElementById("aantalbeurten").innerHTML="Aantal beurten: "+aantalBeurten;
 		}
-		
 		
     </script>
 </body>
