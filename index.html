@@ -49,7 +49,14 @@
 		}
 		
 		function checkKaart(el){
-			draaiKaart(el);
+			if (el.src.endsWith("toe.gif")){
+				el.src=kaart[el.id];
+				document.getElementById("status").innerHTML="Klik op een kaartje";
+			}else{
+				document.getElementById("status").innerHTML="Deze is al gekozen, klik op een gesloten kaart";
+				//TODO: Misschien een timer zodat de tekst weer terug veranderd.
+				return;
+			}
 			var newId=el.id;
 			if(aantalGeklikt==0){
 				kaart1=newId;
@@ -58,22 +65,15 @@
 			}
 			else if(aantalGeklikt==1){
 				kaart2=newId;
-				if(kaart1==kaart2){
+				if(kaart1!=kaart2&&kaart[kaart1]==kaart[kaart2]){
 					document.getElementById("status").innerHTML="Goed zo!";
 				}else{
 					document.getElementById("status").innerHTML="Dit zijn verschillende kaartjes";
+					//TODO: Timer voor het terugdraaien van de kaarten omdat ze verschillend zijn.
 				}
 				aantalGeklikt-=1;
 			}
-		}
-		
-		function draaiKaart(el){
-			if (el.src.endsWith("toe.gif")){
-				el.src=kaart[el.id];
-				document.getElementById("status").innerHTML="Klik op een kaartje";
-			}else{
-				document.getElementById("status").innerHTML="Deze is al gekozen, klik op een gesloten kaart";
-			}
+			
 		}
     </script>
 </body>
