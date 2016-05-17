@@ -1,0 +1,13 @@
+<html>
+	<head>
+	</head>
+	<body>
+		<p id="demo" onClick="status()">klik hier op</p>
+		<script>
+			function status(){
+				document.getElementById("demo").innerHTML = "goed zo";
+				setTimeout(function(){document.getElementById("demo").innerHTML = "klik hier op"}, 1000);
+			}
+		</script>
+	</body>
+</html>
