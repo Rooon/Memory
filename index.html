@@ -12,7 +12,7 @@
 </head>
 <body>
 	<div id="container"></div>
-	<center><p id="status">Klik twee kaartjes</p></center>
+	<center><p id="status">Klik op een kaartje</p></center>
 	<script>
 		var kaart = new Array(); // Array Kaart bevat de bestandsnamen van de kaartafbeeldingen
 		var aantal = 10; // aantal verschillende kaarten. Wordt later instelbaar.
@@ -49,12 +49,13 @@
 		}
 		
 		function checkKaart(el){
+			console.log(el);
 			if (el.src.endsWith("toe.gif")){
 				el.src=kaart[el.id];
 				document.getElementById("status").innerHTML="Klik op een kaartje";
 			}else{
 				document.getElementById("status").innerHTML="Deze is al gekozen, klik op een gesloten kaart";
-				//TODO: Misschien een timer zodat de tekst weer terug veranderd.
+				setTimeout(function(){document.getElementById("status").innerHTML="Klik op een kaartje"}, 1000);
 				return;
 			}
 			var newId=el.id;
@@ -67,14 +68,23 @@
 				kaart2=newId;
 				if(kaart1!=kaart2&&kaart[kaart1]==kaart[kaart2]){
 					document.getElementById("status").innerHTML="Goed zo!";
+					setTimeout(function(){document.getElementById("status").innerHTML="Klik op een kaartje"}, 1000);
 				}else{
 					document.getElementById("status").innerHTML="Dit zijn verschillende kaartjes";
-					//TODO: Timer voor het terugdraaien van de kaarten omdat ze verschillend zijn.
+					console.log(kaart1);
+					console.log(kaart2);
+					setTimeout(function(){
+						document.getElementById("status").innerHTML="Klik op een kaartje";
+						document.getElementById(kaart1).src="toe.gif";
+						document.getElementById(kaart2).src="toe.gif";
+					}, 1000);
 				}
 				aantalGeklikt-=1;
 			}
 			
 		}
+		
+		
     </script>
 </body>
 </html>
