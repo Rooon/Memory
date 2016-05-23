@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Dreumesversie2</title>
+	<script>
+	var kaart = ['koe','paard','varken','schaap','lam'];
+	var answer;
+	
+	function geluid(){
+		if (kaart.length<=0) return;
+		//Kies een random kaart
+		answer = kaart[Math.floor(Math.random() * kaart.length)];
+		//Speel geluid af
+		new Audio('snd/'+answer+'.mp3').play();
+		console.log(answer);
+	}
+	
+	function checkAnswer(el){
+		if (kaart.length<=0) return;
+		if (el.id==answer){
+			//Goed antwoord
+			console.log("+1 goed");
+			document.getElementById('output').innerHTML+='<img src="img/groen.png" width="64px" height="64px"></img>';
+			//Haal het uit "kaart" zodat het niet nog een keer afspeeld.
+		}else{
+			//Fout antwoord
+			console.log("+1 fout");
+			document.getElementById('output').innerHTML+='<img src="img/rood.png" width="64px" height="64px"></img>';
+		}
+		kaart.splice(kaart.indexOf(answer),1);
+		geluid();
+	}
+	geluid();
+	</script>
+</head>
+<body>
+	<img id="koe" src="img/koe.jpg" onclick="checkAnswer(this);"></img>
+	<img id="paard" src="img/paard.jpg" onclick="checkAnswer(this);"></img>
+	<img id="varken" src="img/varken.jpg" onclick="checkAnswer(this);"></img>
+	<img id="schaap" src="img/schaap.jpg" onclick="checkAnswer(this);"></img>
+	<img id="lam" src="img/lam.jpg" onclick="checkAnswer(this);"></img>
+	<p id="output"></p>
+</body>
+</html>
